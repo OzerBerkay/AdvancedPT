@@ -1,2 +1,2 @@
 # AdvancedPT
-# [ClassWork2](https://github.com/OzerBerkay/AdvancedPT/blob/master/Square.html)
+[Class Work:](https://github.com/OzerBerkay/AdvancedPT/blob/master/Square.html)
