@@ -104,6 +104,7 @@ function findID(id) {
 }
 
 function studentsIn(code) {
+    code=code.toUpperCase();
     let t = code+" ";
     let std = findID(code);
     if (!std) {
