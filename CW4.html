@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="../images/icon192.png">
-    <title>Student Database </title>
+    <title>Courses </title>
 
   <style>
     .link {
@@ -46,11 +46,11 @@
 <script>
 "use strict";
 class Course {
-	constructor(code,date,time,classes){
-	this.code=code
-	this.date=date
-	this.time=time
-	this.classes=[]
+	constructor(code,date,time,...classes){
+	this.code=code;
+	this.date=date;
+	this.time=time;
+	this.classes=classes;
 	}
 }
 
@@ -66,7 +66,7 @@ function readData(file) {
 
 function parseStudent(line) {
     let [code, date, time, ...list] = line.split("\t");
-    let a = new Course(code,date, time,list)
+    let a = new Course(code,date, time,...list)
     return a;
 }
 
@@ -107,13 +107,15 @@ function studentsIn(code) {
     let t = code+" ";
     let std = findID(code);
     if (!std) {
-        out.innerText = "bot found"
+        out.innerText = "not found"
     }
+	console.log(std.classes);
+
     out.innerText = std.code+"\n ";
     out.innerText += std.date+"\n ";
     out.innerText += std.time+ "\n ";
-    out.innerText += std.list;
-
+    out.innerText += std.classes;
+	
 }
 
 
