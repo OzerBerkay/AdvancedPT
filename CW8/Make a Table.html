@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,7 @@
 	<style>
     body { max-width: 440px; }
     #sample { overflow-x: auto; }
-    table { border-collapse: collapse; }
+    #table { border-collapse: collapse; }
     th { color: blue; padding: 5px 5px; }
     td { 
         border: 1px solid blue; 
@@ -42,6 +41,7 @@ const url = "https://ozerberkay.github.io/AdvancedPT/CW8/ListOfObjects.txt";
         .then(txt=>txt.text())
         .then(txt =>{
     let a = txt.split("\n");
+	console.log(a);
     for (let line of a) {
     	let inline = line.split("\t");
     	let name = inline[0], Diam = inline[1], Mass = inline[2], Radius=inline[3],Period=inline[4];
@@ -53,22 +53,29 @@ const url = "https://ozerberkay.github.io/AdvancedPT/CW8/ListOfObjects.txt";
 	let m = planets.length;
 	let n = planets[0].length;
     let row = "<th></th>";
+	let pnt="";
     for (let k = 0; k <col.length; k++) 
-        row += "<th>"+col[k]		+"</th>";
+        row += "<th>"+col[k]+"</th>";
     let text = "<tr>"+row+"</tr>";
-    for (let i = 0; i < m-1; i++) {
+	
+    for (let i = 1; i < m; i++) {
        row = "<th>"+i+"</th>";
        for (let j = 0; j < n; j++) {
        	  pln = planets[i]
           row += "<td>"+pln[j]+"</td>";
+		  pnt+=pln[j]+"\t";
+		  
        }
        text += "<tr>"+row+"</tr>";
+	   pnt+="\n";
     }
+	tab.innerHTML=pnt;
     table.innerHTML = text;
 });
 </script>
 <body>
-	<table id="table"></table>
+	<pre id="tab" ></pre>
+	<table id="table" ></table>
 	
 </body>
 </html>
