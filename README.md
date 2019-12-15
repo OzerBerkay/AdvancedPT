@@ -6,7 +6,7 @@
 
 [Class Work 4](https://ozerberkay.github.io/AdvancedPT/CW4.html):Finding Classes Info By It's Code
 
-[Class Work 7](https://ozerberkay.github.io/AdvancedPT/CW7/Timing.html):Time Measurement Versus Of Map And Array
+
 
 [Class Work 8](https://ozerberkay.github.io/AdvancedPT/CW8/Make%20a%20Table.html):Making Table From Another HTML
 
