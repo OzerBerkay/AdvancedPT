@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  #getText {
+  margin-bottom: 10px;
+  height:500px;
+
+}
+ body {
+  background-image: url('https://images.unsplash.com/photo-1549176755-e67f625da235?ixlib=rb-1.2.1&w=1000&q=80');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+ }
+  </style>
+</head>
+<body>
+  <div id="create">
+    <button onClick="createDiv()">Click me!</button>
+  </div>
+  <div id="getText">
+    
+  </div>
+</body>
+<script>
+  function createDiv() {
+    var div = document.createElement('span');
+    div.innerHTML = "<img src=\"post.jpg\" width=\"250px\" height=\"250px\">";
+document.getElementById("getText").appendChild(div);
+  }
+</script>
+</html>
