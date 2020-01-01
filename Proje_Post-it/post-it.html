@@ -1,109 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <style>
-  #getText {
-  margin-bottom: 10px;
-  height:500px;
-}
-textarea {//https://www.w3schools.com/cssref/css3_pr_background-size.asp
-  resize:none;
-  background-color: rgba(0,0,0,0);
-  border:none;
-  background-image: url("post.jpg");//https://stackoverflow.com/questions/54623710/how-to-add-background-image-in-textarea-tag
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 20%;
-  height:30%;
-  margin:2%;
-  
-}
- body {
-  background-image: url('https://images.unsplash.com/photo-1549176755-e67f625da235?ixlib=rb-1.2.1&w=1000&q=80');
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
-  background-size: 100% 100%;
- }
-  </style>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #getText {
+            margin-bottom: 10px;
+            height: 500px;
+        }
+        
+        textarea {
+            //https://www.w3schools.com/cssref/css3_pr_background-size.asp
+            resize: none;
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            background-image: url("post.jpg"); //https://stackoverflow.com/questions/54623710/how-to-add-background-image-in-textarea-tag
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 20%;
+            height: 30%;
+            margin: 2%;
+        }
+        
+        body {
+            background-image: url('https://images.unsplash.com/photo-1549176755-e67f625da235?ixlib=rb-1.2.1&w=1000&q=80');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
 </head>
+
 <body>
 
-  <div id="create" >
-  <input type="button" id="dwn-btn" value="İndir" />
-    <button onClick="createDiv()">Oluştur</button>
-	<input type="file" id="fileInput" content="sdsad">
-  </div>
-  <div id="getText" >
-		
-  </div>
+    <div id="create">
+        <input type="button" id="dwn-btn" value="İndir" />
+        <button onClick="createDiv()">Oluştur</button>
+        <input type="file" id="fileInput" content="sdsad">
+    </div>
+    <div id="getText">
+
+    </div>
 </body>
 <script>
-  let divCount=0;
-  function createDiv(text) {
-  console.log(text);
-    var x = document.createElement("TEXTAREA");//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_textarea_create
-	x.setAttribute("id","div");
-    x.innerHTML="\n";
-	if(text!=undefined){x.innerHTML= x.innerHTML+text;}
-	document.getElementById("getText").appendChild(x);
-	divCount++;
-  }
-  
-  function download(filename, text) {//https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
+    let divCount = 0;
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+    function createDiv(text) {
+        console.log(text);
+        var x = document.createElement("TEXTAREA"); //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_textarea_create
+        x.style.resize = 'none';
+        x.setAttribute("id", "div");
+        if (text != undefined) {
+            x.innerHTML = x.innerHTML + text;
+        }
+        document.getElementById("getText").appendChild(x);
+        divCount++;
+    }
 
-  element.click();
+    function download(filename, text) { //https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
 
-  document.body.removeChild(element);
-}
+        element.style.display = 'none';
+        document.body.appendChild(element);
 
-// Start file download.
-document.getElementById("dwn-btn").addEventListener("click", function() { //https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
-  var text="";
-   var filename = "post-it.txt";
-  if(divCount==1){
-   text = document.getElementById("div").value;
-  download(filename, text);}
-  else if (divCount>1){
-	for(let h=0;h<divCount;h++){
-		text=text+div[h].value+" *$* ";
-	}
-	  download(filename, text);
-  }
-  else{window.alert("Öncelikle Bir Not Oluşturun!!");}
-}, false);
+        element.click();
 
+        document.body.removeChild(element);
+    }
 
-window.onload = function() {  //https://codepen.io/matt-west/pen/KjEHg
-		var fileInput = document.getElementById('fileInput');
-		var fileDisplayArea = document.getElementById('fileDisplayArea');
+    // Start file download.
+    document.getElementById("dwn-btn").addEventListener("click", function() { //https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+        var text = "";
+        var filename = "post-it.txt";
+        if (divCount == 1) {
+            if (document.getElementById("div").value != "") {
+                text = document.getElementById("div").value + "*$*";
+            }
+            download(filename, text);
+        } else if (divCount > 1) {
+            for (let h = 0; h < divCount; h++) {
+                if (div[h].value != "") {
+                    console.log(div[h].value);
+                    text = text + div[h].value + " *$* ";
+                }
+            }
+            download(filename, text);
+        } else {
+            window.alert("Öncelikle Bir Not Oluşturun!!");
+        }
+    }, false);
 
-		fileInput.addEventListener('change', function(e) {
-			var file = fileInput.files[0];
-			var textType = /text.*/;
+    window.onload = function() { //https://codepen.io/matt-west/pen/KjEHg
+        var fileInput = document.getElementById('fileInput');
+        var fileDisplayArea = document.getElementById('fileDisplayArea');
 
-			if (file.type.match(textType)) {
-				var reader = new FileReader();
+        fileInput.addEventListener('change', function(e) {
+            var file = fileInput.files[0];
+            var textType = /text.*/;
 
-				reader.onload = function(e) {
-					var res=reader.result.split("*$*");//https://www.w3schools.com/jsref/jsref_split.asp
-					for(let j=0;j<res.length-1;j++) {
-						createDiv(res[j]);
-					}
-				}
+            if (file.type.match(textType)) {
+                var reader = new FileReader();
 
-				reader.readAsText(file);	
-			} else {
-				fileDisplayArea.innerText = "File not supported!"
-			}
-		});
-}
+                reader.onload = function(e) {
+                    var res = reader.result.split("*$*"); //https://www.w3schools.com/jsref/jsref_split.asp
+                    for (let j = 0; j < res.length - 1; j++) {
+                        createDiv(res[j]);
+                    }
+                }
+
+                reader.readAsText(file);
+            } else {
+                fileDisplayArea.innerText = "File not supported!"
+            }
+        });
+    }
 </script>
+
 </html>
