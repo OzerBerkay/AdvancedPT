@@ -29,6 +29,8 @@ textarea {//https://www.w3schools.com/cssref/css3_pr_background-size.asp
   </style>
 </head>
 <body>
+<input type="button" id="dwn-btn" value="Download dinamically generated text file" />
+<input type="file" id="fileInput">
   <div id="create" >
     <button onClick="createDiv()">Click me!</button>
   </div>
@@ -37,16 +39,70 @@ textarea {//https://www.w3schools.com/cssref/css3_pr_background-size.asp
   </div>
 </body>
 <script>
-  function createDiv() {
+  let divCount=0;
+  function createDiv(text) {
+  console.log(text);
     var x = document.createElement("TEXTAREA");//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_textarea_create
-    //var div = document.createElement('span');
-    //div.innerHTML = "<img src=\"post.jpg\" width=\"20%\" height=\"30%\">";
-	//div.appendChild(document.createElement("TEXTAREA"));//*https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_textarea_create
-	//x.innerHTML="\n\n\n\n\n\n\n\n\n";
-	//x.style.backgroundImage=url("post.jpg");
-   x.innerHTML="\n";
-	
-document.getElementById("getText").appendChild(x);
+	x.setAttribute("id","div");
+    x.innerHTML="\n";
+	if(text!=undefined){x.innerHTML= x.innerHTML+text;}
+	document.getElementById("getText").appendChild(x);
+	divCount++;
   }
+  
+  function download(filename, text) {//https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+// Start file download.
+document.getElementById("dwn-btn").addEventListener("click", function() { //https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+  var text="";
+   var filename = "post-it.txt";
+  if(divCount==1){
+   text = document.getElementById("div").value;
+  download(filename, text);}
+  else if (divCount>1){
+	for(let h=0;h<divCount;h++){
+		text=text+div[h].value+" *$* ";
+	}
+	  download(filename, text);
+  }
+  else{window.alert("Öncelikle Bir Not Oluşturun!!");}
+}, false);
+
+
+window.onload = function() {  //https://codepen.io/matt-west/pen/KjEHg
+		var fileInput = document.getElementById('fileInput');
+		var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+		fileInput.addEventListener('change', function(e) {
+			var file = fileInput.files[0];
+			var textType = /text.*/;
+
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					var res=reader.result.split("*$*");//https://www.w3schools.com/jsref/jsref_split.asp
+					for(let j=0;j<res.length-1;j++) {
+						createDiv(res[j]);
+					}
+				}
+
+				reader.readAsText(file);	
+			} else {
+				fileDisplayArea.innerText = "File not supported!"
+			}
+		});
+}
 </script>
 </html>
