@@ -14,4 +14,4 @@
 
 [Class Work 9](https://ozerberkay.github.io/AdvancedPT/cw9.html):Getting Users Descriptions From Git
 
-[Project Post-It](https://ozerberkay.github.io/AdvancedPT/Proje_Post-it/post-it.html):Getting Users Descriptions From Git
+[Project Post-It](https://ozerberkay.github.io/AdvancedPT/Proje_Post-it/post-it.html):Online Post-It Creator
